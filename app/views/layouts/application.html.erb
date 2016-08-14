@@ -31,14 +31,22 @@
 </nav>
 
 <div id="main_content" class="container">
-	<% flash.each do |name, msg| %>
-		<%= content_tag(:div, msg, class: "alert alert-info") %>
-	<% end %>
+  	
+    <% flash.each do |name, msg| %>
+  		<%= content_tag(:div, msg, class: "alert alert-info") %>
+  	<% end %>
 
 		<div id="content" class="col-md-9 center-block">
-			<%= yield %>
-		</div>
+      <%= yield %>
+    </div>
 	</div>
+
+  <footer class="container-footer bg-4 text-center footer" >
+    <p>
+      <span><i class="fa fa-heart green"></i></span>
+      Powered by Sasha Mussich © 2016
+    </p>
+  </footer>
 </div>
 
 </body>

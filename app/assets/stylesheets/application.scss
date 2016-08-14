@@ -17,6 +17,25 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 
+html, body {
+	font-family: 'Raleway', sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
 
 #logo {
@@ -27,6 +46,8 @@
 	a {
 		color: #cc0000;
 	}
+	margin-left: 70px;
+	font-weight: 700;
 }
 
 html, body {
@@ -43,4 +64,45 @@ html, body {
 
 .login {
 	margin-top: 13px;
+	margin-right: 70px;
+}
+
+#main_content {
+
+	padding-bottom: 100px;
+
+	.author {
+		color: #008000;
+	}
+
+	.font-things {
+		color: #710000;
+		font-weight: 300;
+		font-size: 18px;
+	}
+
+	#content {
+		float: none;
+	}
+	
+	
+	.submit {
+		background-color: #008000;
+	}
+	.back_link {
+		color: #008000;
+		font-weight: 700;
+		font-size: 15px;
+	}
+}
+
+.bg-4 {
+	background-color: #fce7e7;
+	color: #710000;
+}
+
+
+.container-footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }

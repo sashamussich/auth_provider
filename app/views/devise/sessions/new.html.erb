@@ -1,26 +1,19 @@
-<div class="panel panel-default devise-bs">
-  <div class="panel-heading">
-    <h4><%= t('.sign_in_with_LDAP', :default => "Sign in with LDAP") %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
-      <% if devise_mapping.rememberable? %>
-        <div class="checkbox">
-          <%= f.label :remember_me do %>
-            <%= f.check_box :remember_me %>remember me
-          <% end %>
-        </div>
-      <% end %>
-      <%= f.submit  t('.sign_in', :default => "Sign in"), class: "btn btn-primary" %>
-    <% end %>
-  </div>
+<br><br><br><br>
+
+<div class="well font-things">
+  <h1>Welcome to Rails Community</h1>
+  <p>
+    You are Rails passionate dev?! 
+    <br>
+    If answes is YES, login with your facebook account ane enjoy sharing experience 
+    with others Rails devs. 
+    <br>
+    You can vote for projects you like the most, you can share your own projects to be starred by other devs, report issue and add log errors so others can help you solve it :)
+    <br><br>
+    Are you ready to dive in Rails World? 
+
+    <div>
+      <%= link_to "Login with Facebook", "auth/facebook", class: "btn btn-primary" %>
+    </div>
+  </p>
 </div>
-<%= render "devise/shared/links" %>
