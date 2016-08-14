@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Provider</title>
+  <title>Rails Community</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-color">
   <div class="container-fluid">
     <div class="navbar-header">
- 		<h2><%= link_to root_path do%> Sasha's AUTH Provider <% end %> </h2>
+      <div id="logo" class="logo"> 
+        <span>  <%= image_tag("rails_logo.png", width: '50', height: '50') %></span>
+        <%= link_to root_path do%> Rails Community <% end %>
+      </div>
     </div>
 
     <div class="collapse navbar-collapse" >
-    	<ul class="nav navbar-nav navbar-right">
+    	<ul class="nav navbar-nav navbar-right font-color login">
     		<% if current_user %>
     			<li>Signed in as: <%= current_user.name %> <%#= image_tag(@auth['info']['image'], width: '70', height: '70', class: 'img-circle') %> </li> 
     			<li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
     		<% else %>
-    			<li>Sign in with:   <span> <%= link_to "auth/facebook" do %><%= image_tag('facebook.png', width: '50', height: '50', class: 'img-circle') %> <% end %></span></li>
+    			<li id="fb_login">Sign in with:   <span> <%= link_to "auth/facebook" do %><%= image_tag('facebook.png', width: '50', height: '50', class: 'img-circle') %> <% end %></span></li>
     		<% end %>
 		</ul>
     </div>
