@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class AuthController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-access_token">#access_token</a>
+    
+    <li ><a href="#method-i-application">#application</a>
+    
+    <li ><a href="#method-i-authorize">#authorize</a>
+    
+    <li ><a href="#method-i-user">#user</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-AuthController">
+  <h1 id="class-AuthController" class="class">
+    class AuthController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-access_token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">access_token</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST</p>
+          
+          
+
+          
+          <div class="method-source-code" id="access_token-source">
+            <pre><span class="ruby-comment"># File app/controllers/auth_controller.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">access_token</span>
+  <span class="ruby-identifier">application</span> = <span class="ruby-constant">Client</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:client_id</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:client_secret</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">application</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Could not find application&quot;</span>}
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">access_grant</span> = <span class="ruby-constant">AccessGrant</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:code</span>], <span class="ruby-identifier">application</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">access_grant</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Could not authenticate access code&quot;</span>}
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">access_grant</span>.<span class="ruby-identifier">start_expiry_period!</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:access_token</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">access_grant</span>.<span class="ruby-identifier">access_token</span>, <span class="ruby-value">:refresh_token</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">access_grant</span>.<span class="ruby-identifier">refresh_token</span>, <span class="ruby-value">:expires_in</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Devise</span>.<span class="ruby-identifier">timeout_in</span>.<span class="ruby-identifier">to_i</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-authorize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">authorize</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="authorize-source">
+            <pre><span class="ruby-comment"># File app/controllers/auth_controller.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">authorize</span>
+  <span class="ruby-comment"># Note: this method will be called when the user</span>
+  <span class="ruby-comment"># is logged into the provider</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># So we&#39;re essentially granting him access to our</span>
+  <span class="ruby-comment"># system by generating certain tokens and then</span>
+  <span class="ruby-comment"># redirecting him back to the params[:redirect_uri]</span>
+  <span class="ruby-comment"># with a random code and the params[:state]</span>
+
+
+  <span class="ruby-constant">AccessGrant</span>.<span class="ruby-identifier">prune!</span>
+  <span class="ruby-identifier">create_hash</span> = {
+    <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">application</span>,
+    <span class="ruby-identifier">state</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:state</span>]
+  }
+  <span class="ruby-identifier">access_grant</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">access_grants</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">create_hash</span>)
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">access_grant</span>.<span class="ruby-identifier">redirect_uri_for</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:redirect_uri</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">user</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="user-source">
+            <pre><span class="ruby-comment"># File app/controllers/auth_controller.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user</span>
+  <span class="ruby-identifier">hash</span> = {
+    <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;sso&#39;</span>,
+    <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>,
+    <span class="ruby-identifier">info</span><span class="ruby-operator">:</span> {
+       <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">email</span>,
+    },
+    <span class="ruby-identifier">extra</span><span class="ruby-operator">:</span> {
+      <span class="ruby-comment">#  first_name: current_user.first_name,</span>
+      <span class="ruby-comment">#  last_name: current_user.last_name</span>
+      <span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>,
+      <span class="ruby-identifier">last_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+    }
+  }
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_json</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-application" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">application</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="application-source">
+            <pre><span class="ruby-comment"># File app/controllers/auth_controller.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">application</span>
+  <span class="ruby-ivar">@application</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Client</span>.<span class="ruby-identifier">find_by_app_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:client_id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

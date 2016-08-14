@@ -1,0 +1,10 @@
+Wed, 27 Apr 2016 16:38:35 -0300
+README.rdoc	Wed, 27 Apr 2016 16:36:31 -0300
+app/controllers/application_controller.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/controllers/auth_controller.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/controllers/callbacks_controller.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/controllers/home_controller.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/helpers/application_helper.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/models/access_grant.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/models/client.rb	Wed, 27 Apr 2016 16:36:31 -0300
+app/models/user.rb	Wed, 27 Apr 2016 16:36:31 -0300
